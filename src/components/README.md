@@ -1,0 +1,2 @@
+routesフォルダで使うsvelteコンポーネントを置く
+Nuxtのcomponentsフォルダと同じ扱い！
