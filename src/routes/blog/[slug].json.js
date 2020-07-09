@@ -6,6 +6,7 @@ posts.forEach(post => {
 });
 
 export function get(req, res, next) {
+	// [slug].svelteのpreloadから呼ばれる
 	// the `slug` parameter is available because
 	// this file is called [slug].json.js
 	const { slug } = req.params;

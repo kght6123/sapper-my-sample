@@ -1,8 +1,10 @@
 <script context="module">
+	// nuxt.jsのasyncDataのような感じ,コンポーネントが作成される前に呼ばれる
 	export async function preload({ params, query }) {
 		// the `slug` parameter is available because
 		// this file is called [slug].svelte
-		const res = await this.fetch(`blog/${params.slug}.json`);
+		const res = await this.fetch(`blog/${params.slug}.json`);	//  このfetchは[slug].json.jsをパラメータ付きで呼ぶ
+		// fetch以外にもerror, redirectが使える https://sapper.svelte.dev/docs#Context
 		const data = await res.json();
 
 		if (res.status === 200) {

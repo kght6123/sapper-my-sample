@@ -1,0 +1,87 @@
+{
+	"version": "0.1.0",
+	"configurations": [
+		{
+			"name": "Launch localhost in Microsoft Edge",
+			"type": "edge",
+			"request": "launch",
+			"url": "http://localhost:3000/",
+			"webRoot": "${workspaceFolder}/__sapper__/dev/"
+		},
+		// {
+		// 	"name": "Launch index.html in Microsoft Edge",
+		// 	"type": "edge",
+		// 	"request": "launch",
+		// 	"file": "${workspaceFolder}/index.html"
+		// },
+		// {
+		// 	"type": "vscode-edge-devtools.debug",
+		// 	"request": "launch",
+		// 	"name": "Launch Microsoft Edge and open the Elements tool",
+		// 	"url": "http://localhost:3000/",
+		// 	"webRoot": "${workspaceFolder}/__sapper__/dev/"
+		// 	// "file": "${workspaceFolder}/index.html"
+		// },
+		// {
+		// 	"type": "vscode-edge-devtools.debug",
+		// 	"request": "attach",
+		// 	"name": "Attach to Microsoft Edge and open the Elements tool",
+		// 	"url": "http://localhost:3000/",
+		// 	"webRoot": "${workspaceFolder}/__sapper__/dev/"
+		// },
+		// {
+		// 	"type": "chrome",
+		// 	"request": "launch",
+		// 	"name": "Launch Chrome",
+		// 	"url": "http://localhost:3000/",
+		// 	"webRoot": "${workspaceFolder}/__sapper__/dev/"
+		// },
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Program Node.js",
+			"program": "${workspaceFolder}/node_modules/.bin/sapper",
+			// "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/nodemon",
+			"args": [
+				"dev"
+			],
+			// "runtimeArgs": [],
+			"env": {
+				"NODE_ENV": "development",
+				"NODE_ENV_HOST": "local"
+			},
+			"sourceMaps": true,
+			"restart": true,
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Program Watch Tailwind",
+			"program": "${workspaceFolder}/node_modules/.bin/postcss",
+			// "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/nodemon",
+			"args": [
+				"static/tailwind.css",
+				"-o",
+				"static/index.css",
+				"-w"
+			],
+			// "runtimeArgs": [],
+			"sourceMaps": true,
+			"restart": true,
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		},
+	],
+	"compounds": [
+		{
+			"name": "Full-stack",
+			"configurations": [
+				"Launch Program Node.js",
+				"Launch Program Watch Tailwind",
+				"Launch localhost in Microsoft Edge"
+			]
+		}
+	]
+}

@@ -32,16 +32,40 @@
 	}
 </style>
 
+<script context="module">
+	export async function preload(page, { index_loaded }) {
+		const res = await this.fetch(`index.json`, { method: 'POST'});	//  このfetchはindex.json.jsをパラメータ付きで呼ぶ
+		// fetch以外にもerror, redirectが使える https://sapper.svelte.dev/docs#Context
+		const data = await res.json();
+		console.log('post fetch result.', data);
+		if (res.status === 200) {
+			return { index_loaded };
+		}
+		return { index_loaded };
+	};
+</script>
+
 <script>
+	import { onMount } from 'svelte';
+	import { goto } from '@sapper/app';
+	import { stores } from '@sapper/app';
 	import { count, time, elapsed, count2, name, greeting } from '../stores.js';
 	import Incrementer from '../components/Incrementer.svelte';
 	import Decrementer from '../components/Decrementer.svelte';
 	import Resetter from '../components/Resetter.svelte';
 
+	const { preloading, page, session } = stores();
+
 	// let count_value
 	// const unsubscribe = count.subscribe(value => {
 	// 	count_value = value
 	// })
+
+	onMount(async () => {
+		console.log('my-non-ssr-component')
+		// const { host, path, params, query } = page
+		console.log('page', page, /*host, path, params, query,*/ preloading, session)
+	});
 
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,
@@ -49,6 +73,27 @@
 		minute: '2-digit',
 		second: '2-digit'
 	})
+
+	const gotoAbout = async () => {
+		await goto('/about');
+	}
+
+	const gotoSettings = async () => {
+		await goto('/settings/profile');
+	}
+
+	const indexLoaded = async () => {
+		console.log('indexLoaded', fetch)
+		// session.update(() => {
+		// 	return { index_loaded: true }
+		// });
+		session.set({ index_loaded: true })
+		const res = await fetch(`index.json`, { method: 'POST'});	//  このfetchはindex.json.jsを呼ぶ
+		const data = await res.json();
+		console.log('post fetch result.', data);
+	}
+
+	export let index_loaded;
 </script>
 
 <svelte:head>
@@ -86,3 +131,11 @@
 </figure>
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+
+<button on:click={gotoAbout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">About</button>
+
+<button on:click={gotoSettings} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Settings</button>
+
+<button on:click={indexLoaded} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Index Loaded!!!</button>
+
+<p>Session test {index_loaded}</p>

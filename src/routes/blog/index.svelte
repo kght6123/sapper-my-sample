@@ -1,8 +1,11 @@
 <script context="module">
+	// nuxt.jsのasyncDataのような感じ,コンポーネントが作成される前に呼ばれる
 	export function preload({ params, query }) {
+		// このfetchはindex.json.jsのgetを呼ぶ
 		return this.fetch(`blog.json`).then(r => r.json()).then(posts => {
 			return { posts };
 		});
+		// fetch以外にもerror, redirectが使える https://sapper.svelte.dev/docs#Context
 	}
 </script>
 
