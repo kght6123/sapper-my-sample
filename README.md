@@ -2,6 +2,23 @@
 
 The default [Sapper](https://github.com/sveltejs/sapper) template, available for Rollup and webpack.
 
+## Nuxtと比べて
+
+### いいところ
+
+- 画面の初期表示が早い（体感）
+- コンポーネントに書くコードの量が少なくて済む
+- Server側のAPIのjsとコンポーネントをセットで書ける設計になっている（Nuxtのapiはコンポーネントと独立してる）
+- express(polka)側のsessionをコンポーネントに渡して使える（Nuxtできない？）
+- polkaが軽くてよい（expressと比べてメモリ消費少ない、処理早い、GAEのF1でSSRが動きそう）
+
+### よくないところ
+
+- Tailwindやtestフレームワーク、TypeScriptのインストール、storeとローカルストレージの設定がめんどくさい（Nuxtは選ぶだけ）
+- GAEの設定もめんどくさそう
+- Nuxtの様な公式ライブラリが少ないので、ライブラリの追加はめんどくさい
+- 英語の情報しかない（日本語はほぼ皆無）
+- 公式ドキュメントがあっさりしすぎてる
 
 ## Getting started
 
